@@ -1,0 +1,14 @@
+{
+    "name": "sekjun9878/php-libsrclib",
+    "description": "A spec / library to communicate between PHP and srclib's Go-json api format.",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Yoo",
+            "email": "michael@yoo.id.au",
+            "homepage": "https://www.michael.yoo.id.au/",
+            "role": "Project Maintainer"
+        }
+    ]
+}
