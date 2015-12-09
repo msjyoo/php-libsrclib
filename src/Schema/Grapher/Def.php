@@ -1,9 +1,11 @@
 <?php
 
+namespace sekjun9878\Libsrclib\Schema\Grapher;
+
 /**
  * Def is a definition in code.
  */
-final class Def
+final class Def implements \JsonSerializable
 {
     /**
      * DefKey is the natural unique key for a def.
@@ -17,7 +19,10 @@ final class Def
      *
      * Required.
      */
-    use DefKey;
+    use DefKey {
+        DefKey::__construct as protected defKeyConstruct;
+        DefKey::jsonSerialize as protected defKeyJsonSerialize;
+    }
 
     /**
      * Name of the definition.
@@ -159,4 +164,262 @@ final class Def
      * @var string|null $treePath
      */
     protected $treePath;
+
+    /**
+     * @param string $path
+     * @param string $name
+     * @param string $file
+     * @param int $defStart
+     * @param int $defEnd
+     */
+    public function __construct($path, $name, $file, $defStart, $defEnd)
+    {
+        $this->defKeyConstruct($path);
+
+        $this->name = $name;
+        $this->file = $file;
+        $this->defStart = $defStart;
+        $this->defEnd = $defEnd;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Def
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getKind()
+    {
+        return $this->kind;
+    }
+
+    /**
+     * @param null|string $kind
+     *
+     * @return Def
+     */
+    public function setKind($kind)
+    {
+        $this->kind = $kind;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param string $file
+     *
+     * @return Def
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDefStart()
+    {
+        return $this->defStart;
+    }
+
+    /**
+     * @param int $defStart
+     *
+     * @return Def
+     */
+    public function setDefStart($defStart)
+    {
+        $this->defStart = $defStart;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDefEnd()
+    {
+        return $this->defEnd;
+    }
+
+    /**
+     * @param int $defEnd
+     *
+     * @return Def
+     */
+    public function setDefEnd($defEnd)
+    {
+        $this->defEnd = $defEnd;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getExported()
+    {
+        return $this->exported;
+    }
+
+    /**
+     * @param bool|null $exported
+     *
+     * @return Def
+     */
+    public function setExported($exported)
+    {
+        $this->exported = $exported;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getLocal()
+    {
+        return $this->local;
+    }
+
+    /**
+     * @param bool|null $local
+     *
+     * @return Def
+     */
+    public function setLocal($local)
+    {
+        $this->local = $local;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getTest()
+    {
+        return $this->test;
+    }
+
+    /**
+     * @param bool|null $test
+     *
+     * @return Def
+     */
+    public function setTest($test)
+    {
+        $this->test = $test;
+
+        return $this;
+    }
+
+    /**
+     * @return array|mixed|null
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param array|mixed|null $data
+     *
+     * @return Def
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * @return DefDoc[]|null
+     */
+    public function getDocs()
+    {
+        return $this->docs;
+    }
+
+    /**
+     * @param DefDoc[]|null $docs
+     *
+     * @return Def
+     */
+    public function setDocs($docs)
+    {
+        $this->docs = $docs;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getTreePath()
+    {
+        return $this->treePath;
+    }
+
+    /**
+     * @param null|string $treePath
+     *
+     * @return Def
+     */
+    public function setTreePath($treePath)
+    {
+        $this->treePath = $treePath;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->defKeyJsonSerialize() + [
+            'Name' => $this->name,
+            'File' => $this->file,
+            'DefStart' => $this->defStart,
+            'DefEnd' => $this->defEnd
+        ] + array_filter([
+            'Kind' => $this->kind,
+            'Exported' => $this->exported,
+            'Local' => $this->local,
+            'Test' => $this->test,
+            'Data' => $this->data,
+            'Docs' => $this->docs,
+            'TreePath' => $this->treePath
+        ]);
+    }
 }

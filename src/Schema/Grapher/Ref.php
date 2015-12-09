@@ -1,9 +1,11 @@
 <?php
 
+namespace sekjun9878\Libsrclib\Schema\Grapher;
+
 /**
  * Ref represents a reference from source code to a Def.
  */
-final class Ref
+final class Ref implements \JsonSerializable
 {
     /**
      * DefRepo is the repository URI of the Def that this Ref refers to.
@@ -115,4 +117,277 @@ final class Ref
      * @var int $end
      */
     protected $end;
+
+    /**
+     * @param string $defPath
+     * @param int $start
+     * @param int $end
+     */
+    public function __construct($defPath, $start, $end)
+    {
+        $this->defPath = $defPath;
+        $this->start = $start;
+        $this->end = $end;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDefRepo()
+    {
+        return $this->defRepo;
+    }
+
+    /**
+     * @param string|null $defRepo
+     *
+     * @return Ref
+     */
+    public function setDefRepo($defRepo)
+    {
+        $this->defRepo = $defRepo;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDefUnitType()
+    {
+        return $this->defUnitType;
+    }
+
+    /**
+     * @param string|null $defUnitType
+     *
+     * @return Ref
+     */
+    public function setDefUnitType($defUnitType)
+    {
+        $this->defUnitType = $defUnitType;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDefUnit()
+    {
+        return $this->defUnit;
+    }
+
+    /**
+     * @param string|null $defUnit
+     *
+     * @return Ref
+     */
+    public function setDefUnit($defUnit)
+    {
+        $this->defUnit = $defUnit;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefPath()
+    {
+        return $this->defPath;
+    }
+
+    /**
+     * @param string $defPath
+     *
+     * @return Ref
+     */
+    public function setDefPath($defPath)
+    {
+        $this->defPath = $defPath;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRepo()
+    {
+        return $this->repo;
+    }
+
+    /**
+     * @param string|null $repo
+     *
+     * @return Ref
+     */
+    public function setRepo($repo)
+    {
+        $this->repo = $repo;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCommitId()
+    {
+        return $this->commitId;
+    }
+
+    /**
+     * @param string|null $commitId
+     *
+     * @return Ref
+     */
+    public function setCommitId($commitId)
+    {
+        $this->commitId = $commitId;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUnitType()
+    {
+        return $this->unitType;
+    }
+
+    /**
+     * @param string|null $unitType
+     *
+     * @return Ref
+     */
+    public function setUnitType($unitType)
+    {
+        $this->unitType = $unitType;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
+     * @param string|null $unit
+     *
+     * @return Ref
+     */
+    public function setUnit($unit)
+    {
+        $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getDef()
+    {
+        return $this->def;
+    }
+
+    /**
+     * @param bool|null $def
+     *
+     * @return Ref
+     */
+    public function setDef($def)
+    {
+        $this->def = $def;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param string|null $file
+     *
+     * @return Ref
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
+
+    /**
+     * @param int $start
+     *
+     * @return Ref
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEnd()
+    {
+        return $this->end;
+    }
+
+    /**
+     * @param int $end
+     *
+     * @return Ref
+     */
+    public function setEnd($end)
+    {
+        $this->end = $end;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'DefPath' => $this->defPath,
+            'Start' => $this->start,
+            'End' => $this->end
+        ] + array_filter([
+            'DefRepo' => $this->defRepo,
+            'DefUnitType' => $this->defUnitType,
+            'DefUnit' => $this->defUnit,
+            'Repo' => $this->repo,
+            'CommitID' => $this->commitId,
+            'UnitType' => $this->unitType,
+            'Unit' => $this->unit,
+            'Def' => $this->def
+        ]);
+    }
 }

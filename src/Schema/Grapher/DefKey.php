@@ -1,5 +1,7 @@
 <?php
 
+namespace sekjun9878\Libsrclib\Schema\Grapher;
+
 /**
  * DefKey specifies a definition, either concretely or abstractly. A concrete
  * definition key has a non-empty CommitID and refers to a definition defined in a
@@ -73,4 +75,125 @@ trait DefKey
      * @var string $path
      */
     protected $path;
+
+    /**
+     * @param string $path
+     */
+    private function __construct($path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRepo()
+    {
+        return $this->repo;
+    }
+
+    /**
+     * @param string|null $repo
+     *
+     * @return DefKey
+     */
+    public function setRepo($repo)
+    {
+        $this->repo = $repo;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCommitId()
+    {
+        return $this->commitId;
+    }
+
+    /**
+     * @param string|null $commitId
+     *
+     * @return DefKey
+     */
+    public function setCommitId($commitId)
+    {
+        $this->commitId = $commitId;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUnitType()
+    {
+        return $this->unitType;
+    }
+
+    /**
+     * @param string|null $unitType
+     *
+     * @return DefKey
+     */
+    public function setUnitType($unitType)
+    {
+        $this->unitType = $unitType;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
+     * @param string|null $unit
+     *
+     * @return DefKey
+     */
+    public function setUnit($unit)
+    {
+        $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return DefKey
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    private function jsonSerialize()
+    {
+        return array_filter([
+            'Repo' => $this->repo,
+            'CommitID' => $this->commitId,
+            'UnitType' => $this->unitType,
+            'Unit' => $this->unit
+        ]) + ['Path' => $this->path];
+    }
 }

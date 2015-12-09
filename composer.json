@@ -10,5 +10,8 @@
             "homepage": "https://www.michael.yoo.id.au/",
             "role": "Project Maintainer"
         }
-    ]
+    ],
+    "require": {
+        "nikic/php-parser": "^2.0.0beta1"
+    }
 }

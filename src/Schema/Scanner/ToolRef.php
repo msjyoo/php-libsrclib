@@ -1,5 +1,7 @@
 <?php
 
+namespace sekjun9878\Libsrclib\Schema\Scanner;
+
 /**
  * A ToolRef identifies a tool inside a specific toolchain. It can be used to look up the tool.
  */

@@ -1,5 +1,7 @@
 <?php
 
+namespace sekjun9878\Libsrclib\Schema\Scanner;
+
 final class SourceUnit
 {
     /**

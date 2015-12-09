@@ -1,6 +1,8 @@
 <?php
 
-final class Info
+namespace sekjun9878\Libsrclib\Schema\Scanner;
+
+final class Info implements \JsonSerializable
 {
     /**
      * NameInRepository is the name to use when displaying the source unit in
@@ -51,4 +53,12 @@ final class Info
      * @var string
      */
     protected $typeName;
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        // TODO: Implement jsonSerialize() method.
+    }
 }
